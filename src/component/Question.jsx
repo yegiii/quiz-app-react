@@ -6,6 +6,16 @@ import QUESTIONS from "../questions";
 export default function Question({ index, onSelectAnswer, onSkipeQuestion }) {
   const [answer, setAnswer] = useState({ selectedAnswer: "", isCorrect: null });
 
+  let timer = 10000;
+
+  if (answer.selectedAnswer) {
+    timer = 1000;
+  }
+
+  if (answer.isCorrect != null) {
+    timer = 2000;
+  }
+
   function handleSelectAnswer(answer) {
     setAnswer({
       selectedAnswer: answer,
@@ -34,7 +44,12 @@ export default function Question({ index, onSelectAnswer, onSkipeQuestion }) {
 
   return (
     <div id="question">
-      <QuestionTimer timeout={10000} onTimeout={onSkipeQuestion} />
+      <QuestionTimer
+        key={timer}
+        timeout={timer}
+        onTimeout={answer.selectedAnswer === " " ? onSkipeQuestion : null}
+        mode={answerState}
+      />
       <h2>{QUESTIONS[index].text}</h2>
 
       <Answers
