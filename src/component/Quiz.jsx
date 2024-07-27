@@ -1,8 +1,9 @@
 import { useCallback, useState } from "react";
 
 import QUESTIONS from "../questions";
-import quizCompleteImg from "../assets/quiz-complete.png";
 import Question from "./Question";
+import Summary from "./Summary";
+
 export default function Quiz() {
   const [userAnswers, setUserAnswers] = useState([]);
 
@@ -24,12 +25,7 @@ export default function Quiz() {
   );
 
   if (quizIsComplete) {
-    return (
-      <div id="summary">
-        <img src={quizCompleteImg} alt="completed quiz image" />
-        <h2>Quiz Completed</h2>
-      </div>
-    );
+    return <Summary userAnswers={userAnswers} />;
   }
 
   return (
@@ -38,7 +34,7 @@ export default function Quiz() {
         key={activeQuestionIndex}
         index={activeQuestionIndex}
         onSelectAnswer={handleSelectAnswer}
-        onSkipeAnswer={handleSkipQuestion}
+        onSkipeQuestion={handleSkipQuestion}
       />
     </div>
   );

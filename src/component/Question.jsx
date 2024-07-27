@@ -47,7 +47,7 @@ export default function Question({ index, onSelectAnswer, onSkipeQuestion }) {
       <QuestionTimer
         key={timer}
         timeout={timer}
-        onTimeout={answer.selectedAnswer === " " ? onSkipeQuestion : null}
+        onTimeout={answer.selectedAnswer === "" ? onSkipeQuestion : null}
         mode={answerState}
       />
       <h2>{QUESTIONS[index].text}</h2>
